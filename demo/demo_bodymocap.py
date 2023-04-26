@@ -11,6 +11,9 @@ import argparse
 import json
 import pickle
 from datetime import datetime
+import sys
+
+sys.path.append('/garmentor/frankmocap/')
 
 from demo.demo_options import DemoOptions
 from bodymocap.body_mocap_api import BodyMocap
@@ -117,19 +120,19 @@ def run_body_mocap(args, body_bbox_detector, body_mocap, visualizer):
         pred_mesh_list = demo_utils.extract_mesh_from_output(pred_output_list)
 
         # visualization
-        res_img = visualizer.visualize(
-            img_original_bgr,
-            pred_mesh_list = pred_mesh_list, 
-            body_bbox_list = body_bbox_list)
-        
-        # show result in the screen
         if not args.no_display:
+            res_img = visualizer.visualize(
+                img_original_bgr,
+                pred_mesh_list = pred_mesh_list, 
+                body_bbox_list = body_bbox_list)
+            
+            # show result in the screen
             res_img = res_img.astype(np.uint8)
             ImShow(res_img)
 
-        # save result image
-        if args.out_dir is not None:
-            demo_utils.save_res_img(args.out_dir, image_path, res_img)
+            # save result image
+            if args.out_dir is not None:
+                demo_utils.save_res_img(args.out_dir, image_path, res_img)
 
         # save predictions to pkl
         if args.save_pred_pkl:
@@ -165,11 +168,15 @@ def main():
     body_mocap = BodyMocap(checkpoint_path, args.smpl_dir, device, use_smplx)
 
     # Set Visualizer
-    if args.renderer_type in ['pytorch3d', 'opendr']:
-        from renderer.screen_free_visualizer import Visualizer
+    # TODO (kbartol): Need to fix the renderer error to get and store result visualizations.
+    if not args.no_display:
+        if args.renderer_type in ['pytorch3d', 'opendr']:
+            from renderer.screen_free_visualizer import Visualizer
+        else:
+            from renderer.visualizer import Visualizer
+        visualizer = Visualizer(args.renderer_type)
     else:
-        from renderer.visualizer import Visualizer
-    visualizer = Visualizer(args.renderer_type)
+        visualizer = None
   
     run_body_mocap(args, body_bbox_detector, body_mocap, visualizer)
 

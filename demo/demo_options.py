@@ -8,12 +8,10 @@ class DemoOptions():
         parser = argparse.ArgumentParser()
         
         # parser.add_argument('--checkpoint', required=False, default=default_checkpoint, help='Path to pretrained checkpoint')
-        default_checkpoint_body_smpl ='./extra_data/body_module/pretrained_weights/2020_05_31-00_50_43-best-51.749683916568756.pt'
+        default_checkpoint_body_smpl ='/data/frankmocap/pretrained/frankmocap/2020_05_31-00_50_43-best-51.749683916568756.pt'
         parser.add_argument('--checkpoint_body_smpl', required=False, default=default_checkpoint_body_smpl, help='Path to pretrained checkpoint')
-        default_checkpoint_body_smplx ='./extra_data/body_module/pretrained_weights/smplx-03-28-46060-w_spin_mlc3d_46582-2089_2020_03_28-21_56_16.pt'
+        default_checkpoint_body_smplx ='/data/frankmocap/pretrained/frankmocap/smplx-03-28-46060-w_spin_mlc3d_46582-2089_2020_03_28-21_56_16.pt'
         parser.add_argument('--checkpoint_body_smplx', required=False, default=default_checkpoint_body_smplx, help='Path to pretrained checkpoint')
-        default_checkpoint_hand = "./extra_data/hand_module/pretrained_weights/pose_shape_best.pth"
-        parser.add_argument('--checkpoint_hand', required=False, default=default_checkpoint_hand, help='Path to pretrained checkpoint')
 
         # input options
         parser.add_argument('--input_path', type=str, default=None, help="""Path of video, image, or a folder where image files exists""")
@@ -34,7 +32,7 @@ class DemoOptions():
         parser.add_argument('--single_person', action='store_true', help='Reconstruct only one person in the scene with the biggest bbox')
         parser.add_argument('--no_display', action='store_true', help='Do not visualize output on the screen')
         parser.add_argument('--no_video_out', action='store_true', help='Do not merge rendered frames to video (ffmpeg)')
-        parser.add_argument('--smpl_dir', type=str, default='./extra_data/smpl/', help='Folder where smpl files are located.')
+        parser.add_argument('--smpl_dir', type=str, default='/data/hierprob3d/smpl/', help='Folder where smpl files are located.')
         parser.add_argument('--skip', action='store_true', help='Skip there exist already processed outputs')
         parser.add_argument('--video_url', type=str, default=None, help='URL of YouTube video, or image.')
         parser.add_argument('--download', '-d', action='store_true', help='Download YouTube video first (in webvideo folder), and process it')

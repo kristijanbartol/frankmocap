@@ -1,5 +1,14 @@
 # Installation
 
+## Install Body Module for Garmentor
+
+Run a single script:
+
+```
+bash scripts/install_frankmocap.sh
+```
+
+
 ## Installing All Modules
 
 - The entire modules can be installed following the instruction below.

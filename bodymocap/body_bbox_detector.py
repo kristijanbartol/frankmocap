@@ -12,9 +12,7 @@ import torchvision.transforms as transforms
 
 # Code from https://github.com/Daniil-Osokin/lightweight-human-pose-estimation.pytorch/blob/master/demo.py
 
-# 2D body pose estimator
-pose2d_estimator_path = './detectors/body_pose_estimator'
-sys.path.append(pose2d_estimator_path)
+sys.path.append('/garmentor/frankmocap/')
 from detectors.body_pose_estimator.pose2d_models.with_mobilenet import PoseEstimationWithMobileNet
 from detectors.body_pose_estimator.modules.load_state import load_state
 from detectors.body_pose_estimator.val import normalize, pad_width
